@@ -1,16 +1,16 @@
 {
-    "pluginAlias": "RiseGardenPlatform",
-    "pluginType": "platform",
-    "singular": true,
-    "schema": {
-        "type": "object",
-        "properties": {
-            "name": {
-                "title": "Name",
-                "type": "string",
-                "required": true,
-                "default": "Example Dynamic Platform"
-            }
-        }
+  "pluginAlias": "RiseGardenPlatform",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "required": true,
+        "default": "Rise Garden Platform"
+      }
     }
+  }
 }

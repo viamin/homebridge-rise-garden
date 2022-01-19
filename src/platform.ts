@@ -1,7 +1,8 @@
 import { API, IndependentPlatformPlugin, Logger, PlatformAccessory, PlatformConfig, Service, Characteristic } from 'homebridge';
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings';
-import { ExamplePlatformAccessory } from './platformAccessory';
+import { RiseGardenLights } from './lights';
+import { RiseGardenAirTemperature } from './temperature';
 
 /**
  * HomebridgePlatform
@@ -57,11 +58,11 @@ export class RiseGardenPlatform implements IndependentPlatformPlugin {
     const exampleDevices = [
       {
         exampleUniqueId: 'ABCD',
-        exampleDisplayName: 'Bedroom',
+        exampleDisplayName: 'Lights',
       },
       {
         exampleUniqueId: 'EFGH',
-        exampleDisplayName: 'Kitchen',
+        exampleDisplayName: 'Temperature',
       },
     ];
 
@@ -87,7 +88,7 @@ export class RiseGardenPlatform implements IndependentPlatformPlugin {
 
         // create the accessory handler for the restored accessory
         // this is imported from `platformAccessory.ts`
-        new ExamplePlatformAccessory(this, existingAccessory);
+        new RiseGardenLights(this, existingAccessory, this.config);
 
         // it is possible to remove platform accessories at any time using `api.unregisterPlatformAccessories`, eg.:
         // remove platform accessories when no longer present
@@ -106,7 +107,7 @@ export class RiseGardenPlatform implements IndependentPlatformPlugin {
 
         // create the accessory handler for the newly create accessory
         // this is imported from `platformAccessory.ts`
-        new ExamplePlatformAccessory(this, accessory);
+        new RiseGardenLights(this, accessory, this.config);
 
         // link the accessory to your platform
         this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [accessory]);
