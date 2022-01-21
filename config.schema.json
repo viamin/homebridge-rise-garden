@@ -1,16 +1,38 @@
 {
-  "pluginAlias": "RiseGardenPlatform",
-  "pluginType": "platform",
-  "singular": true,
-  "schema": {
-    "type": "object",
-    "properties": {
-      "name": {
-        "title": "Name",
-        "type": "string",
-        "required": true,
-        "default": "Rise Garden Platform"
-      }
+    "pluginAlias": "RiseGardenPlatform",
+    "pluginType": "platform",
+    "singular": true,
+    "schema": {
+        "type": "object",
+        "properties": {
+            "name": {
+                "title": "Name",
+                "type": "string",
+                "required": true,
+                "default": "Rise Garden Platform"
+            },
+            "username": {
+                "title": "Username",
+                "type": "string",
+                "required": true,
+                "description": "Your Rise Garden app username"
+            },
+            "password": {
+                "title": "Password",
+                "type": "string",
+                "required": true,
+                "description": "Your Rise Garden app password"
+            },
+            "temperature_unit": {
+                "title": "Temperature Format",
+                "type": "string",
+                "default": "fahrenheit",
+                "oneOf": [
+                    { "title": "°F", "enum": ["fahrenheit"] },
+                    { "title": "°C", "enum": ["celsius"] }
+                ],
+                "required": true
+            }
+        }
     }
-  }
 }
