@@ -1,11 +1,17 @@
 import { Logger, PlatformConfig } from 'homebridge';
-import axios, { AxiosRequestConfig, Method } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 
+type Token = {
+  access_token: string;
+  refresh_token: string;
+  user_id: string;
+  expires_in: number;
+};
 export class RiseGardenAPI {
   private static instance: RiseGardenAPI;
   private baseUrl: string;
   public readonly log: Logger;
-  private tokenInfo: any;
+  private tokenInfo: Token;
   private readonly config: PlatformConfig;
 
   public constructor(config: PlatformConfig, log: Logger) {
@@ -20,7 +26,7 @@ export class RiseGardenAPI {
     };
   }
 
-  public async getGardens(): Promise<any> {
+  public async getGardens(): Promise<AxiosResponse> {
     this.log.debug('Executed getGardens');
     return this.request('get', '/gardens');
   }
@@ -28,16 +34,16 @@ export class RiseGardenAPI {
   public async getCurrentTemperature(gardenId: number): Promise<number> {
     this.log.debug('Executed getCurrentTemperature with gardenId:', gardenId);
     const status = await this.getDeviceStatus(gardenId);
-    return status.at;
+    return status.data.at;
   }
 
   public async getLightLevel(gardenId: number): Promise<number> {
     this.log.debug('Executed getLightLevel with gardenId:', gardenId);
     const status = await this.getDeviceStatus(gardenId);
-    return status.lamp_level;
+    return status.data.lamp_level;
   }
 
-  public setLightLevel(gardenId: number, level: number): Promise<string> {
+  public setLightLevel(gardenId: number, level: number): Promise<AxiosResponse> {
     this.log.debug('Executed setLightLevel with gardenId and level:', gardenId, level);
     const body = JSON.stringify({
       'light_level': level,
@@ -46,12 +52,12 @@ export class RiseGardenAPI {
     return this.request('put', `/gardens/${gardenId}/device/light-level`, body);
   }
 
-  public async getDeviceStatus(gardenId: number): Promise<any> {
+  public async getDeviceStatus(gardenId: number): Promise<AxiosResponse> {
     this.log.debug('Executed getDeviceStatus with gardenId:', gardenId);
     return this.request('get', `/gardens/${gardenId}/device/status`);
   }
 
-  private async loginIfNeeded(path: string): Promise<any> {
+  private async loginIfNeeded(): Promise<boolean> {
     if (this.tokenInfo.access_token === '' || this.tokenIsExpired()) {
       await this.login(this.config.username, this.config.password);
     }
@@ -59,7 +65,7 @@ export class RiseGardenAPI {
     return false;
   }
 
-  private tokenIsExpired(): boolean {
+  private tokenIsExpired(): number|boolean {
     return this.tokenInfo.expires_in && (this.tokenInfo.expires_in - 60000 < new Date().getTime());
   }
 
@@ -94,9 +100,9 @@ export class RiseGardenAPI {
     return true;
   }
 
-  private async request(method: Method, path: string, params: string|null = null, body: string|null = null): Promise<any> {
+  private async request(method: Method, path: string, params: string|null = null, body: string|null = null): Promise<AxiosResponse> {
     if (path !== '/auth/login') {
-      await this.loginIfNeeded(path);
+      await this.loginIfNeeded();
     }
 
     const headers = {
@@ -113,7 +119,6 @@ export class RiseGardenAPI {
       data: JSON.stringify(body),
     };
 
-    const res = await axios(options);
-    return res.data;
+    return axios(options);
   }
 }

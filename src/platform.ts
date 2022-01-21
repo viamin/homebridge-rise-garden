@@ -34,7 +34,7 @@ export class RiseGardenPlatform implements DynamicPlatformPlugin {
     this.accessories.push(accessory);
   }
 
-  async discoverDevices() {
+  private async discoverDevices() {
     this.log.debug('calling discoverDevices');
     // Return early if there is no config yet
     if (!this.config.username || !this.config.password) {
@@ -46,7 +46,7 @@ export class RiseGardenPlatform implements DynamicPlatformPlugin {
     const gardens = await riseApi.getGardens();
 
     // loop over the discovered devices and register each one if it has not already been registered
-    for (const garden of gardens) {
+    for (const garden of gardens.data) {
       this.log.debug('Got garden from Rise API:', garden);
 
       // generate a unique id for the accessory this should be generated from

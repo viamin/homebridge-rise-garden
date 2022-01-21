@@ -70,7 +70,7 @@ export class RiseGardenAirTemperature {
       const api = new RiseGardenAPI(this.config, this.log);
       const airTemperature = await api.getCurrentTemperature(this.accessory.context.device.id);
 
-      this.platform.log.debug('Get airTemperature reading ->', airTemperature);
+      this.log.debug('Get airTemperature reading ->', airTemperature);
       if (this.pullTimer) {
         this.log.debug('resetting pull timer');
         this.pullTimer.resetTimer();
