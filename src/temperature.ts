@@ -1,5 +1,5 @@
 import { Logger, Service, PlatformAccessory, CharacteristicValue, PlatformConfig } from 'homebridge';
-
+import { PullTimer } from 'homebridge-http-base';
 import { RiseGardenPlatform } from './platform';
 import { RiseGardenAPI } from './api';
 
@@ -10,14 +10,7 @@ import { RiseGardenAPI } from './api';
  */
 export class RiseGardenAirTemperature {
   private service: Service;
-
-  /**
-   * These are just used to create a working example
-   * You should implement your own code to track the state of your accessory
-   */
-  private sensorStates = {
-    airTemperature: Promise.resolve(100),
-  };
+  private pullTimer: PullTimer|null = null;
 
   constructor(
     private readonly platform: RiseGardenPlatform,
@@ -26,7 +19,6 @@ export class RiseGardenAirTemperature {
     private readonly log: Logger,
   ) {
     this.log.debug('initializing RiseGardenAirTemperature');
-    // set accessory information
     this.accessory.getService(this.platform.Service.AccessoryInformation)!
       .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Rise-Gardens')
       .setCharacteristic(this.platform.Characteristic.Model, 'Floor-Unit')
@@ -45,18 +37,18 @@ export class RiseGardenAirTemperature {
     // see https://developers.homebridge.io/#/service/TemperatureSensor
 
     // register handlers for the CurrentTemperature Characteristic
-    this.service.getCharacteristic(this.platform.Characteristic.CurrentTemperature)
-      .onGet(this.handleCurrentTemperatureGet.bind(this)); // SET - bind to the 'getCurrentTemperature` method below
-  }
+    // this.service.getCharacteristic(this.platform.Characteristic.CurrentTemperature)
+    // .onGet(this.getTemperature.bind(this)); // SET - bind to the 'getTemperature` method below
 
-  handleCurrentTemperatureGet() {
-    this.platform.log.debug('Triggered handleCurrentTemperatureGet');
-
-    const api = new RiseGardenAPI(this.config, this.log);
-    const currentValue = api.getCurrentTemperature(this.accessory.context.device.id);
-    this.sensorStates.airTemperature = currentValue;
-
-    return currentValue;
+    if (config.pull_timer) {
+      this.log.debug('setting pull timer to:', config.pull_timer);
+      this.getTemperature();
+      // Convert from milliseconds to minutes
+      this.pullTimer = new PullTimer(log, config.pull_timer * 60000, this.getTemperature.bind(this), value => {
+        this.service.setCharacteristic(this.platform.Characteristic.CurrentTemperature, value);
+      });
+      this.pullTimer.start();
+    }
   }
 
   /**
@@ -72,18 +64,19 @@ export class RiseGardenAirTemperature {
    * @example
    * this.service.updateCharacteristic(this.platform.Characteristic.On, true)
    */
-  async getTemperature(): Promise<CharacteristicValue> {
+  private async getTemperature(): Promise<CharacteristicValue> {
     this.log.debug('Called getTemperature');
     try {
       const api = new RiseGardenAPI(this.config, this.log);
-      let airTemperature = await api.getCurrentTemperature(this.accessory.context.device.id);
+      const airTemperature = await api.getCurrentTemperature(this.accessory.context.device.id);
 
-      this.platform.log.debug('Get Characteristic airTemperature ->', airTemperature);
-      // By default, the garden returns temperature in celcius
-      if (this.config.temperature_unit === 'fahrenheit') {
-        this.log.debug('Converting airTemperature to fahrenheit from: ', airTemperature);
-        airTemperature = airTemperature * 9 / 5 + 32;
+      this.platform.log.debug('Get airTemperature reading ->', airTemperature);
+      if (this.pullTimer) {
+        this.log.debug('resetting pull timer');
+        this.pullTimer.resetTimer();
       }
+      this.log.debug('Setting CurrentTemperature to:', airTemperature);
+      this.service.updateCharacteristic(this.platform.Characteristic.CurrentTemperature, airTemperature);
       return airTemperature;
     } catch (err) {
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);

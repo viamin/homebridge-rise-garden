@@ -23,15 +23,14 @@
                 "required": true,
                 "description": "Your Rise Garden app password"
             },
-            "temperature_unit": {
-                "title": "Temperature Format",
-                "type": "string",
-                "default": "fahrenheit",
-                "oneOf": [
-                    { "title": "°F", "enum": ["fahrenheit"] },
-                    { "title": "°C", "enum": ["celsius"] }
-                ],
-                "required": true
+            "pull_timer": {
+                "title": "Poll interval (minutes)",
+                "type": "number",
+                "default": 30,
+                "required": true,
+                "description": "How often to poll the Rise Garden API for new data",
+                "minimum": 1,
+                "maximum": 1440
             }
         }
     }

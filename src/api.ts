@@ -34,7 +34,6 @@ export class RiseGardenAPI {
   public async getLightLevel(gardenId: number): Promise<number> {
     this.log.debug('Executed getLightLevel with gardenId:', gardenId);
     const status = await this.getDeviceStatus(gardenId);
-    this.log.debug('status:', status);
     return status.lamp_level;
   }
 
@@ -46,13 +45,12 @@ export class RiseGardenAPI {
     });
   }
 
-  private async getDeviceStatus(gardenId: number): Promise<any> {
+  public async getDeviceStatus(gardenId: number): Promise<any> {
     this.log.debug('Executed getDeviceStatus with gardenId:', gardenId);
     return this.get(`/gardens/${gardenId}/device/status`);
   }
 
   private async loginIfNeeded(path: string): Promise<any> {
-    this.log.debug('Executed loginIfNeeded with path:', path);
     if (this.tokenInfo.access_token === '' || this.tokenIsExpired()) {
       await this.login(this.config.username, this.config.password);
     }
@@ -65,7 +63,7 @@ export class RiseGardenAPI {
   }
 
   private async login(username: string, password: string): Promise<boolean> {
-    this.log.debug('Executed login with username and password:', username, password);
+    this.log.debug('Executed login with username and password:', username, 'hidden');
     const data = {
       'email': username,
       'password': password,
@@ -108,7 +106,6 @@ export class RiseGardenAPI {
   }
 
   private async request(method, path, params = null, body = null): Promise<any> {
-    this.log.debug(`making axios ${method} request to path: ${path}`);
     if (path !== '/auth/login') {
       await this.loginIfNeeded(path);
     }
