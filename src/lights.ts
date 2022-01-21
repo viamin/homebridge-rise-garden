@@ -69,6 +69,7 @@ export class RiseGardenLights {
       this.log.debug('Get Characteristic On ->', isOn);
       return isOn;
     } catch (err) {
+      this.log.info('Error getting light state via Rise API');
       this.log.debug('Error getting on:', err);
       // if you need to return an error to show the device as "Not Responding" in the Home app:
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
@@ -86,6 +87,7 @@ export class RiseGardenLights {
       await api.setLightLevel(this.accessory.context.device.id, value as number);
       return true;
     } catch (err) {
+      this.log.info('Error setting brightness via Rise API');
       this.log.debug('Error setting brightness:', err);
       // if you need to return an error to show the device as "Not Responding" in the Home app:
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);

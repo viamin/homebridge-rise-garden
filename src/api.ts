@@ -116,7 +116,7 @@ export class RiseGardenAPI {
       url: path,
       headers: headers,
       params: params,
-      data: JSON.stringify(body),
+      data: body,
     };
 
     return axios(options);
