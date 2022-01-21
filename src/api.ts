@@ -49,7 +49,7 @@ export class RiseGardenAPI {
       'light_level': level,
       'wait_for_response': true,
     });
-    return this.request('put', `/gardens/${gardenId}/device/light-level`, body);
+    return this.request('put', `/gardens/${gardenId}/device/light-level`, null, body);
   }
 
   public async getDeviceStatus(gardenId: number): Promise<AxiosResponse> {

@@ -79,6 +79,7 @@ export class RiseGardenAirTemperature {
       this.service.updateCharacteristic(this.platform.Characteristic.CurrentTemperature, airTemperature);
       return airTemperature;
     } catch (err) {
+      this.log.debug('Error getting airTemperature reading', err);
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
     }
   }
