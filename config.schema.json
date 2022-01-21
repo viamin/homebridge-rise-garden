@@ -5,12 +5,6 @@
     "schema": {
         "type": "object",
         "properties": {
-            "name": {
-                "title": "Name",
-                "type": "string",
-                "required": true,
-                "default": "Rise Garden Platform"
-            },
             "username": {
                 "title": "Username",
                 "type": "string",
