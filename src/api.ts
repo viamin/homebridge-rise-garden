@@ -1,5 +1,5 @@
 import { Logger, PlatformConfig } from 'homebridge';
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, Method } from 'axios';
 
 export class RiseGardenAPI {
   private static instance: RiseGardenAPI;
@@ -22,7 +22,7 @@ export class RiseGardenAPI {
 
   public async getGardens(): Promise<any> {
     this.log.debug('Executed getGardens');
-    return this.get('/gardens');
+    return this.request('get', '/gardens');
   }
 
   public async getCurrentTemperature(gardenId: number): Promise<number> {
@@ -39,15 +39,16 @@ export class RiseGardenAPI {
 
   public setLightLevel(gardenId: number, level: number): Promise<string> {
     this.log.debug('Executed setLightLevel with gardenId and level:', gardenId, level);
-    return this.put(`/gardens/${gardenId}/device/light-level`, {
+    const body = JSON.stringify({
       'light_level': level,
       'wait_for_response': true,
     });
+    return this.request('put', `/gardens/${gardenId}/device/light-level`, body);
   }
 
   public async getDeviceStatus(gardenId: number): Promise<any> {
     this.log.debug('Executed getDeviceStatus with gardenId:', gardenId);
-    return this.get(`/gardens/${gardenId}/device/status`);
+    return this.request('get', `/gardens/${gardenId}/device/status`);
   }
 
   private async loginIfNeeded(path: string): Promise<any> {
@@ -93,19 +94,7 @@ export class RiseGardenAPI {
     return true;
   }
 
-  private get(path: string): Promise<any> {
-    return this.request('get', path);
-  }
-
-  private put(path: string, data: any): Promise<any> {
-    return this.request('put', path, null, data);
-  }
-
-  private post(path: string, data: any): Promise<any> {
-    return this.request('post', path, null, data);
-  }
-
-  private async request(method, path, params = null, body = null): Promise<any> {
+  private async request(method: Method, path: string, params: string|null = null, body: string|null = null): Promise<any> {
     if (path !== '/auth/login') {
       await this.loginIfNeeded(path);
     }
@@ -115,7 +104,7 @@ export class RiseGardenAPI {
       'Authorization': 'Bearer ' + this.tokenInfo.access_token,
     };
 
-    const options = {
+    const options: AxiosRequestConfig = {
       method: method,
       baseURL: this.baseUrl,
       url: path,
