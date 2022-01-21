@@ -42,10 +42,10 @@ export class RiseGardenLights {
    * Handle "SET" requests from HomeKit
    * These are sent when the user changes the state of an accessory, for example, turning on a Light bulb.
    */
-  async setOn(value: CharacteristicValue): Promise<any> {
+  async setOn(value: CharacteristicValue): Promise<boolean> {
     this.log.debug('called setOn:', value);
     const target = value ? 100 : 0;
-    this.setBrightness(target);
+    return this.setBrightness(target);
   }
 
   /**
@@ -78,11 +78,12 @@ export class RiseGardenLights {
    * Handle "SET" requests from HomeKit
    * These are sent when the user changes the state of an accessory, for example, changing the Brightness
    */
-  async setBrightness(value: CharacteristicValue): Promise<any> {
+  async setBrightness(value: CharacteristicValue): Promise<boolean> {
     this.log.debug('called setBrightness:', value);
     try {
       const api = new RiseGardenAPI(this.config, this.log);
       await api.setLightLevel(this.accessory.context.device.id, value as number);
+      return true;
     } catch (err) {
       // if you need to return an error to show the device as "Not Responding" in the Home app:
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
