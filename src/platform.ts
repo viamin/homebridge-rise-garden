@@ -1,6 +1,7 @@
-import { API, IndependentPlatformPlugin, Logger, PlatformAccessory, PlatformConfig, Service, Characteristic } from 'homebridge';
+import { API, DynamicPlatformPlugin, Logger, PlatformAccessory, PlatformConfig, Service, Characteristic } from 'homebridge';
 
 import { PLATFORM_NAME, PLUGIN_NAME } from './settings';
+import { RiseGardenAPI } from './api';
 import { RiseGardenLights } from './lights';
 import { RiseGardenAirTemperature } from './temperature';
 
@@ -9,7 +10,7 @@ import { RiseGardenAirTemperature } from './temperature';
  * This class is the main constructor for your plugin, this is where you should
  * parse the user config and discover/register accessories with Homebridge.
  */
-export class RiseGardenPlatform implements IndependentPlatformPlugin {
+export class RiseGardenPlatform implements DynamicPlatformPlugin {
   public readonly Service: typeof Service = this.api.hap.Service;
   public readonly Characteristic: typeof Characteristic = this.api.hap.Characteristic;
 
@@ -50,34 +51,32 @@ export class RiseGardenPlatform implements IndependentPlatformPlugin {
    * Accessories must only be registered once, previously created accessories
    * must not be registered again to prevent "duplicate UUID" errors.
    */
-  discoverDevices() {
+  async discoverDevices() {
+    this.log.debug('Executed discoverDevices with config');
+    // Return early if there is no config yet
+    if (!this.config.username || !this.config.password) {
+      return;
+    }
 
-    // EXAMPLE ONLY
-    // A real plugin you would discover accessories from the local network, cloud services
-    // or a user-defined array in the platform config.
-    const exampleDevices = [
-      {
-        exampleUniqueId: 'ABCD',
-        exampleDisplayName: 'Lights',
-      },
-      {
-        exampleUniqueId: 'EFGH',
-        exampleDisplayName: 'Temperature',
-      },
-    ];
+    // Get list of gardens
+    const riseApi = new RiseGardenAPI(this.config, this.log);
+    const gardens = await riseApi.getGardens();
 
     // loop over the discovered devices and register each one if it has not already been registered
-    for (const device of exampleDevices) {
+    for (const garden of gardens) {
+      this.log.debug('Got garden from Rise API:', garden);
 
       // generate a unique id for the accessory this should be generated from
       // something globally unique, but constant, for example, the device serial
       // number or MAC address
-      const uuid = this.api.hap.uuid.generate(device.exampleUniqueId);
+      const uuid = this.api.hap.uuid.generate(`${garden.id}`);
 
+      this.log.debug('generated uuid for garden:', uuid);
       // see if an accessory with the same uuid has already been registered and restored from
       // the cached devices we stored in the `configureAccessory` method above
       const existingAccessory = this.accessories.find(accessory => accessory.UUID === uuid);
 
+      // Each garden has a light and a temperature sensor
       if (existingAccessory) {
         // the accessory already exists
         this.log.info('Restoring existing accessory from cache:', existingAccessory.displayName);
@@ -88,7 +87,7 @@ export class RiseGardenPlatform implements IndependentPlatformPlugin {
 
         // create the accessory handler for the restored accessory
         // this is imported from `platformAccessory.ts`
-        new RiseGardenLights(this, existingAccessory, this.config);
+        new RiseGardenLights(this, existingAccessory, this.config, this.log);
 
         // it is possible to remove platform accessories at any time using `api.unregisterPlatformAccessories`, eg.:
         // remove platform accessories when no longer present
@@ -96,18 +95,19 @@ export class RiseGardenPlatform implements IndependentPlatformPlugin {
         // this.log.info('Removing existing accessory from cache:', existingAccessory.displayName);
       } else {
         // the accessory does not yet exist, so we need to create it
-        this.log.info('Adding new accessory:', device.exampleDisplayName);
+        this.log.info('Adding new accessory:', garden.name);
 
         // create a new accessory
-        const accessory = new this.api.platformAccessory(device.exampleDisplayName, uuid);
+        const accessory = new this.api.platformAccessory(garden.name, uuid);
 
         // store a copy of the device object in the `accessory.context`
         // the `context` property can be used to store any data about the accessory you may need
-        accessory.context.device = device;
+        accessory.context.device = garden;
 
         // create the accessory handler for the newly create accessory
         // this is imported from `platformAccessory.ts`
-        new RiseGardenLights(this, accessory, this.config);
+        new RiseGardenLights(this, accessory, this.config, this.log);
+        new RiseGardenAirTemperature(this, accessory, this.config, this.log);
 
         // link the accessory to your platform
         this.api.registerPlatformAccessories(PLUGIN_NAME, PLATFORM_NAME, [accessory]);

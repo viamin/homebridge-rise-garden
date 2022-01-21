@@ -1,4 +1,4 @@
-import { Service, PlatformAccessory, CharacteristicValue, PlatformConfig } from 'homebridge';
+import { Logger, Service, PlatformAccessory, CharacteristicValue, PlatformConfig } from 'homebridge';
 
 import { RiseGardenPlatform } from './platform';
 import { RiseGardenAPI } from './api';
@@ -24,8 +24,9 @@ export class RiseGardenLights {
     private readonly platform: RiseGardenPlatform,
     private readonly accessory: PlatformAccessory,
     private readonly config: PlatformConfig,
+    private readonly log: Logger,
   ) {
-
+    this.log.debug('initializing RiseGardenLights');
     // set accessory information
     this.accessory.getService(this.platform.Service.AccessoryInformation)!
       .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Rise-Gardens')
@@ -38,11 +39,13 @@ export class RiseGardenLights {
 
     // set the service name, this is what is displayed as the default name on the Home app
     // in this example we are using the name we stored in the `accessory.context` in the `discoverDevices` method.
-    this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.exampleDisplayName);
+    this.log.debug('about to setCharacteristic', accessory.context.device);
+    this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.name);
 
     // each service must implement at-minimum the "required characteristics" for the given service type
     // see https://developers.homebridge.io/#/service/Lightbulb
 
+    this.log.debug('about to setup getCharacteristic');
     // register handlers for the On/Off Characteristic
     this.service.getCharacteristic(this.platform.Characteristic.On)
       .onSet(this.setOn.bind(this))                // SET - bind to the `setOn` method below
@@ -58,7 +61,9 @@ export class RiseGardenLights {
    * These are sent when the user changes the state of an accessory, for example, turning on a Light bulb.
    */
   async setOn(value: CharacteristicValue): Promise<any> {
-    this.setBrightness(100);
+    this.log.debug('called setOn:', value);
+    const target = value ? 100 : 0;
+    this.setBrightness(target);
   }
 
   /**
@@ -75,9 +80,10 @@ export class RiseGardenLights {
    * this.service.updateCharacteristic(this.platform.Characteristic.On, true)
    */
   async getOn(): Promise<CharacteristicValue> {
+    this.log.debug('called getOn');
     try {
-      const api = new RiseGardenAPI(this.config.gardenId);
-      const isOn = await api.getLightLevel() > 0;
+      const api = new RiseGardenAPI(this.config, this.log);
+      const isOn = await api.getLightLevel(this.accessory.context.device.id) > 0;
       this.platform.log.debug('Get Characteristic On ->', isOn);
       return isOn;
     } catch (err) {
@@ -90,10 +96,11 @@ export class RiseGardenLights {
    * Handle "SET" requests from HomeKit
    * These are sent when the user changes the state of an accessory, for example, changing the Brightness
    */
-  async setBrightness(value: CharacteristicValue): Promise<boolean> {
+  async setBrightness(value: CharacteristicValue): Promise<any> {
+    this.log.debug('called setBrightness:', value);
     try {
-      const api = new RiseGardenAPI(this.config.gardenId);
-      return await api.setLightLevel(value as number) === 'success';
+      const api = new RiseGardenAPI(this.config, this.log);
+      await api.setLightLevel(this.accessory.context.device.id, value as number);
     } catch (err) {
       // if you need to return an error to show the device as "Not Responding" in the Home app:
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);

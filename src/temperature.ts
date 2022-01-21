@@ -1,4 +1,4 @@
-import { Service, PlatformAccessory, CharacteristicValue, PlatformConfig } from 'homebridge';
+import { Logger, Service, PlatformAccessory, CharacteristicValue, PlatformConfig } from 'homebridge';
 
 import { RiseGardenPlatform } from './platform';
 import { RiseGardenAPI } from './api';
@@ -23,8 +23,9 @@ export class RiseGardenAirTemperature {
     private readonly platform: RiseGardenPlatform,
     private readonly accessory: PlatformAccessory,
     private readonly config: PlatformConfig,
+    private readonly log: Logger,
   ) {
-
+    this.log.debug('initializing RiseGardenAirTemperature');
     // set accessory information
     this.accessory.getService(this.platform.Service.AccessoryInformation)!
       .setCharacteristic(this.platform.Characteristic.Manufacturer, 'Rise-Gardens')
@@ -38,7 +39,7 @@ export class RiseGardenAirTemperature {
 
     // set the service name, this is what is displayed as the default name on the Home app
     // in this example we are using the name we stored in the `accessory.context` in the `discoverDevices` method.
-    this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.exampleDisplayName);
+    this.service.setCharacteristic(this.platform.Characteristic.Name, accessory.context.device.name);
 
     // each service must implement at-minimum the "required characteristics" for the given service type
     // see https://developers.homebridge.io/#/service/TemperatureSensor
@@ -49,10 +50,10 @@ export class RiseGardenAirTemperature {
   }
 
   handleCurrentTemperatureGet() {
-    this.platform.log.debug('Triggered GET CurrentTemperature');
+    this.platform.log.debug('Triggered handleCurrentTemperatureGet');
 
-    const api = new RiseGardenAPI(this.config.gardenId);
-    const currentValue = api.getCurrentTemperature();
+    const api = new RiseGardenAPI(this.config, this.log);
+    const currentValue = api.getCurrentTemperature(this.accessory.context.device.id);
     this.sensorStates.airTemperature = currentValue;
 
     return currentValue;
@@ -72,18 +73,20 @@ export class RiseGardenAirTemperature {
    * this.service.updateCharacteristic(this.platform.Characteristic.On, true)
    */
   async getTemperature(): Promise<CharacteristicValue> {
-    // const airTemperature = await this.sensorStates.airTemperature;
+    this.log.debug('Called getTemperature');
+    try {
+      const api = new RiseGardenAPI(this.config, this.log);
+      let airTemperature = await api.getCurrentTemperature(this.accessory.context.device.id);
 
-    const api = new RiseGardenAPI(this.config.gardenId);
-    const airTemperature = api.getCurrentTemperature();
-
-    this.platform.log.debug('Get Characteristic airTemparature ->', airTemperature);
-
-    // if you need to return an error to show the device as "Not Responding" in the Home app:
-    if (!airTemperature) {
+      this.platform.log.debug('Get Characteristic airTemperature ->', airTemperature);
+      // By default, the garden returns temperature in celcius
+      if (this.config.temperature_unit === 'fahrenheit') {
+        this.log.debug('Converting airTemperature to fahrenheit from: ', airTemperature);
+        airTemperature = airTemperature * 9 / 5 + 32;
+      }
+      return airTemperature;
+    } catch (err) {
       throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
     }
-
-    return airTemperature;
   }
 }
