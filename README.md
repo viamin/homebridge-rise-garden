@@ -2,7 +2,8 @@
 
 This [Homebridge](https://github.com/homebridge/homebridge) plugin can be used control the lights on your Rise Garden with HomeKit. Also, did you know your [Rise Garden](https://risegardens.com) has an air temperature sensor? You can get the current temperature from your Rise Garden into HomeKit as well.
 
-This is a 3rd party plugin and is not supported by Rise Gardens.
+This is a 3rd party plugin and is not supported by or affiliated with Rise Gardens.
+
 ## Installation
 
 First of all you need to have [Homebridge](https://github.com/homebridge/homebridge) installed. Refer to the repo for
