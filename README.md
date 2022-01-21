@@ -6,9 +6,9 @@ This plugin is not supported by or affiliated with Rise Gardens.
 
 ## Installation
 
-First of all you need to have [Homebridge](https://github.com/homebridge/homebridge) installed. Refer to the repo for
-instructions.  
-Then run the following command to install `homebridge-rise-garden`
+First you need to have [Homebridge](https://github.com/homebridge/homebridge) installed. Refer to the repo for instructions.  
+
+Run the following command to install `homebridge-rise-garden`:
 
 ```
 sudo npm install -g homebridge-rise-garden
@@ -19,6 +19,6 @@ sudo npm install -g homebridge-rise-garden
 This plugin controls your Rise Garden using the Rise Garden API. You'll need to provide your username and password to access your garden via the API.
 
 * **Name** \<string\>: The accessory name displayed in HomeKit
-* **Username** \<string\> **required**: Your Rise Gardens username. This is the same username you use to login to the Rise Gardens app.
-* **Password** \<string\> **required**: Your Rise Gardens password. This is the same password you use to login to the Rise Gardens app.
+* **Username** \<string\> **required**: Your Rise Gardens username. This is the username you use to login to the Rise Gardens app.
+* **Password** \<string\> **required**: Your Rise Gardens password. This is the password you use to login to the Rise Gardens app.
 * **Poll Interval** \<integer\> **required**: The interval in minutes to poll the API for temperature updates. Default is 30 minutes.
