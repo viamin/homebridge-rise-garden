@@ -66,7 +66,7 @@ export class RiseGardenLights {
     try {
       const api = new RiseGardenAPI(this.config, this.log);
       const isOn = await api.getLightLevel(this.accessory.context.device.id) > 0;
-      this.platform.log.debug('Get Characteristic On ->', isOn);
+      this.log.debug('Get Characteristic On ->', isOn);
       return isOn;
     } catch (err) {
       // if you need to return an error to show the device as "Not Responding" in the Home app:

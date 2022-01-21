@@ -119,7 +119,6 @@ export class RiseGardenAPI {
       data: JSON.stringify(body),
     };
 
-    const res = await axios(options);
-    return res.data;
+    return axios(options);
   }
 }
