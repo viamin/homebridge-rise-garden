@@ -42,10 +42,10 @@ export class RiseGardenLights {
    * Handle "SET" requests from HomeKit
    * These are sent when the user changes the state of an accessory, for example, turning on a Light bulb.
    */
-  async setOn(value: CharacteristicValue): Promise<boolean> {
+  async setOn(value: CharacteristicValue): Promise<void> {
     this.log.debug('called setOn:', value);
     const target = value ? 100 : 0;
-    return this.setBrightness(target);
+    this.setBrightness(target);
   }
 
   /**
@@ -80,12 +80,11 @@ export class RiseGardenLights {
    * Handle "SET" requests from HomeKit
    * These are sent when the user changes the state of an accessory, for example, changing the Brightness
    */
-  async setBrightness(value: CharacteristicValue): Promise<boolean> {
+  async setBrightness(value: CharacteristicValue): Promise<void> {
     this.log.debug('called setBrightness:', value);
     try {
       const api = new RiseGardenAPI(this.config, this.log);
       await api.setLightLevel(this.accessory.context.device.id, value as number);
-      return true;
     } catch (err) {
       this.log.info('Error setting brightness via Rise API');
       this.log.debug('Error setting brightness:', err);
