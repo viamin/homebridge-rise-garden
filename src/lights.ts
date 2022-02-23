@@ -35,7 +35,8 @@ export class RiseGardenLights {
 
     // register handlers for the Brightness Characteristic
     this.service.getCharacteristic(this.platform.Characteristic.Brightness)
-      .onSet(this.setBrightness.bind(this));       // SET - bind to the 'setBrightness` method below
+      .onSet(this.setBrightness.bind(this))        // SET - bind to the 'setBrightness` method below
+      .onGet(this.getBrightness.bind(this));       // GET - bind to the 'getBrightness' method below
   }
 
   /**
@@ -93,4 +94,22 @@ export class RiseGardenLights {
     }
   }
 
+  /**
+   * Handle the "GET" requests from HomeKit
+   * These are sent when HomeKit wants to know the current state of the accessory, for example, checking if a Light bulb is on.
+   */
+  async getBrightness(): Promise<CharacteristicValue> {
+    this.log.debug('called getBrightness');
+    try {
+      const api = new RiseGardenAPI(this.config, this.log);
+      const brightness = await api.getLightLevel(this.accessory.context.device.id);
+      this.log.debug('Get Characteristic Brightness ->', brightness);
+      return brightness;
+    } catch (err) {
+      this.log.info('Error getting light brightness via Rise API');
+      this.log.debug('Error getting brightness:', err);
+      // if you need to return an error to show the device as "Not Responding" in the Home app:
+      throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
+    }
+  }
 }
