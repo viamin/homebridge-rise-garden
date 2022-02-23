@@ -57,16 +57,52 @@ export class RiseGardenAPI {
     return this.request('get', `/gardens/${gardenId}/device/status`);
   }
 
-  private async loginIfNeeded(): Promise<boolean> {
-    if (this.tokenInfo.access_token === '' || this.tokenIsExpired()) {
+  private tokenIsExpired(): number|boolean {
+    return this.tokenInfo.expires_in && (this.tokenInfo.expires_in - 60000 < new Date().getTime());
+  }
+
+  private async refreshOrLogin(): Promise<boolean> {
+    if (this.tokenInfo.refresh_token !== '' && this.tokenIsExpired()) {
+      await this.refresh();
+    } else if (this.tokenInfo.access_token === '') {
       await this.login(this.config.username, this.config.password);
     }
 
     return false;
   }
 
-  private tokenIsExpired(): number|boolean {
-    return this.tokenInfo.expires_in && (this.tokenInfo.expires_in - 60000 < new Date().getTime());
+  private async refresh(): Promise<boolean> {
+    this.log.debug('Executed refresh');
+    const refresh_token = this.tokenInfo.refresh_token;
+    const data = {
+      'refresh_token': refresh_token,
+    };
+    const options: AxiosRequestConfig = {
+      method: 'POST',
+      baseURL: this.baseUrl,
+      url: '/auth/refresh_token',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.tokenInfo.access_token,
+      },
+      data: JSON.stringify(data),
+    };
+
+    const res = await axios.request(options);
+    if (res.status !== 200) {
+      return false;
+    }
+
+    const { token, expires_in } = res.data;
+    const cached_user_id = this.tokenInfo.user_id;
+
+    this.tokenInfo = {
+      access_token: token,
+      refresh_token: refresh_token,
+      user_id: cached_user_id,
+      expires_in: expires_in + new Date().getTime(),
+    };
+    return true;
   }
 
   private async login(username: string, password: string): Promise<boolean> {
@@ -101,8 +137,8 @@ export class RiseGardenAPI {
   }
 
   private async request(method: Method, path: string, params: string|null = null, body: string|null = null): Promise<AxiosResponse> {
-    if (path !== '/auth/login') {
-      await this.loginIfNeeded();
+    if (path !== '/auth/login' && path !== '/auth/refresh_token') {
+      await this.refreshOrLogin();
     }
 
     const headers = {
