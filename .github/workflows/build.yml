@@ -1,6 +1,9 @@
 name: Build and Lint
 
-on: [push, pull_request]
+on: 
+  push:
+    branches-ignore:
+      - main
 
 jobs:
   build:
