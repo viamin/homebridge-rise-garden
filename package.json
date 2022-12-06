@@ -28,7 +28,7 @@
         "homebridge-plugin"
     ],
     "dependencies": {
-        "axios": "^0.25.0",
+        "axios": "^1.2.1",
         "homebridge-http-base": "^2.1.12"
     },
     "devDependencies": {
