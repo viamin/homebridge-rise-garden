@@ -1,5 +1,5 @@
 {
-    "displayName": "Rise Garden",
+    "displayName": "Homebridge Rise Garden",
     "name": "homebridge-rise-garden",
     "version": "0.0.0-development",
     "description": "A Homebridge plugin to control the lights on your Rise Garden from HomeKit.",
