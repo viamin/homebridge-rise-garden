@@ -33,7 +33,7 @@
     },
     "devDependencies": {
         "@commitlint/cli": "^17.3.0",
-        "@commitlint/config-conventional": "^17.3.0",
+        "@commitlint/config-conventional": "^18.4.3",
         "@types/jest": "^26.0.24",
         "@types/node": "^20.1.1",
         "@types/rewire": "^2.5.28",
