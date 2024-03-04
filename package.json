@@ -32,7 +32,7 @@
         "homebridge-http-base": "^2.1.12"
     },
     "devDependencies": {
-        "@commitlint/cli": "^18.4.3",
+        "@commitlint/cli": "^19.0.3",
         "@commitlint/config-conventional": "^18.4.3",
         "@types/jest": "^29.0.0",
         "@types/node": "^20.1.1",
