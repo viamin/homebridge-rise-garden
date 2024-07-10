@@ -6,6 +6,11 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
+    groups:
+      dev-dependencies:
+        dependency-type: "development"
+        exclude-patterns:
+          - "@typescript-eslint/parser"
     directory: "/"
     schedule:
       interval: "weekly"
