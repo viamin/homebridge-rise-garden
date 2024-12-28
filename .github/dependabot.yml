@@ -17,6 +17,8 @@ updates:
     commit-message:
       prefix: "build"
       include: "scope"
+    assignees:
+      - "viamin" 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -24,3 +26,5 @@ updates:
     commit-message:
       prefix: "build"
       include: "scope"
+    assignees:
+      - "viamin" 
