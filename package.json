@@ -1,7 +1,7 @@
 {
     "displayName": "Homebridge Rise Garden",
     "name": "homebridge-rise-garden",
-    "version": "0.0.0-development",
+    "version": "1.1.76",
     "description": "A Homebridge plugin to control the lights on your Rise Garden from HomeKit.",
     "license": "Apache-2.0",
     "repository": {
@@ -21,8 +21,7 @@
         "watch": "npm run build && npm link && nodemon",
         "build": "rimraf ./dist && tsc",
         "prepublishOnly": "npm run lint && npm run build",
-        "test": "jest --passWithNoTests",
-        "semantic-release": "semantic-release"
+        "test": "jest --passWithNoTests"
     },
     "keywords": [
         "homebridge-plugin"
@@ -49,7 +48,6 @@
         "nodemon": "^3.0.1",
         "rewire": "^9.0.0",
         "rimraf": "^6.0.1",
-        "semantic-release": "^24.0.0",
         "ts-jest": "^29.0.0",
         "ts-node": "^10.3.0",
         "typescript": "^5.0.0"
