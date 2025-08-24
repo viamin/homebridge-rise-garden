@@ -47,7 +47,9 @@ jobs:
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
+        run: |
+          npm whoami
+          npm publish --access public
       - name: Comment on PRs included in release
         uses: apexskier/github-release-commenter@3bd413ad5e1d603bfe2282f9f06f2bdcec079327
         with:
