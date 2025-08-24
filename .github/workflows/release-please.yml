@@ -16,7 +16,7 @@ jobs:
       release-created: ${{ steps.release.outputs.release_created }}
       tag-name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@c2a5a2bd6a758a0937f1ddb1e8950609867ed15c
         id: release
         with:
           config-file: .release-please-config.json
@@ -27,8 +27,8 @@ jobs:
     if: ${{ needs.release-please.outputs.release-created }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
@@ -42,3 +42,16 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish
+      - name: Comment on PRs included in release
+        uses: apexskier/github-release-commenter@3bd413ad5e1d603bfe2282f9f06f2bdcec079327
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          comment-template: |
+            🎉 This PR is included in version {release_name} 🎉
+
+            The release is available on:
+
+            - [npm package](https://www.npmjs.com/package/homebridge-rise-garden) (@latest dist-tag)
+            - [GitHub release]({release_link})
+
+            Your release-please bot 📦🚀
