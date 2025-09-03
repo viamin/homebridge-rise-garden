@@ -2,7 +2,6 @@
 
 ## [2.0.0](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v1.1.76...homebridge-rise-garden-v2.0.0) (2025-08-24)
 
-
 ### ⚠ BREAKING CHANGES
 
 * **deps:** This latest update requires node 20
@@ -13,7 +12,6 @@
 * add GitHub release commenter to publish workflow ([0f45393](https://github.com/viamin/homebridge-rise-garden/commit/0f453936e53c8029a4041ddd3d34d8b975d5a2ea))
 * add GitHub release commenter to publish workflow ([e3b34ff](https://github.com/viamin/homebridge-rise-garden/commit/e3b34ffe773482b7e5ee7f7d8527427568002a83))
 * allow dependabot builds to trigger releases ([98d8fbd](https://github.com/viamin/homebridge-rise-garden/commit/98d8fbd40414d5360cf2a89dba2874a58de768ed))
-
 
 ### Bug Fixes
 
@@ -32,7 +30,6 @@
 * use correct branch names for actions ([4a7ed75](https://github.com/viamin/homebridge-rise-garden/commit/4a7ed7586bfb875cabaef0b0d44bfb69e8e5a242))
 * use standard Homebridge plugin naming convention ([641fd7a](https://github.com/viamin/homebridge-rise-garden/commit/641fd7a16830032ff3a19c4a3312cd317afae160))
 * use standard Homebridge plugin naming convention ([1fd07df](https://github.com/viamin/homebridge-rise-garden/commit/1fd07df6aafd3e45401043da88200db2ae6aca20))
-
 
 ### Build System
 
