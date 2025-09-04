@@ -1,8 +1,7 @@
 name: Publish Package
 on:
-  push:
-    tags:
-      - 'homebridge-rise-garden-v*'
+  release:
+    types: [published]
 permissions:
   id-token: write # Required for OIDC
   contents: read
