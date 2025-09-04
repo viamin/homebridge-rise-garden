@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.5](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.4...homebridge-rise-garden-v2.0.5) (2025-09-04)
+
+
+### Miscellaneous Chores
+
+* update publish workflow to trigger on release published events ([8fcf3b4](https://github.com/viamin/homebridge-rise-garden/commit/8fcf3b46d24ae5414bdf2cb68f9f00759ce58554))
+
 ## [2.0.4](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.3...homebridge-rise-garden-v2.0.4) (2025-09-04)
 
 
