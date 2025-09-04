@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.2](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.1...homebridge-rise-garden-v2.0.2) (2025-09-04)
+
+
+### Miscellaneous Chores
+
+* add GitHub Actions workflow for package publishing ([43bae24](https://github.com/viamin/homebridge-rise-garden/commit/43bae248e21c805c714abfda78f7e250d25ce9da))
+* unhide miscellaneous chores in release configuration ([1e374e5](https://github.com/viamin/homebridge-rise-garden/commit/1e374e5c31f0a6fc0f7b3cf60ffd2f95b8867747))
+
 ## [2.0.1](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.0...homebridge-rise-garden-v2.0.1) (2025-09-04)
 
 
