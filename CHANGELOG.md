@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.3...homebridge-rise-garden-v2.0.4) (2025-09-04)
+
+
+### Miscellaneous Chores
+
+* run yamlfmt on workflows ([4eb2215](https://github.com/viamin/homebridge-rise-garden/commit/4eb22159e7874a489bc8de311fd8945980bcb6d5))
+
 ## [2.0.3](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.2...homebridge-rise-garden-v2.0.3) (2025-09-04)
 
 
