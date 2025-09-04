@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.2...homebridge-rise-garden-v2.0.3) (2025-09-04)
+
+
+### Bug Fixes
+
+* update tag pattern for package publishing ([8228f0f](https://github.com/viamin/homebridge-rise-garden/commit/8228f0f377a067c52295cb635bbd3c4750e39f99))
+
 ## [2.0.2](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.1...homebridge-rise-garden-v2.0.2) (2025-09-04)
 
 
