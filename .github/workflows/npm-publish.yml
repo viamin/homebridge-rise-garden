@@ -1,6 +1,5 @@
 # This workflow runs tests on push and PR
 name: Build and Test
-
 on:
   push:
     branches:
@@ -8,11 +7,9 @@ on:
   pull_request:
     branches:
       - main
-
 concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
-
 jobs:
   test:
     runs-on: ubuntu-latest
