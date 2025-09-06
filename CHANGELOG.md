@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.1](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.0...v3.0.1) (2025-09-06)
+
+
+### Bug Fixes
+
+* improve error handling for token refresh and login processes ([279cea4](https://github.com/viamin/homebridge-rise-garden/commit/279cea4a10047c0664709564ea84a8f533ca6301))
+* improve error handling for token refresh and login processes ([abbefee](https://github.com/viamin/homebridge-rise-garden/commit/abbefee14a64bbe29c1073d0573679a24e244199))
+* lint ([98d28da](https://github.com/viamin/homebridge-rise-garden/commit/98d28da1c7df990a0afffecc54100862988fec60))
+
+
+### Code Refactoring
+
+* fix slow plugin warning ([b966827](https://github.com/viamin/homebridge-rise-garden/commit/b96682764c93ab3b640c1b8782f3a674b5b7da2d))
+
 ## [3.0.0](https://github.com/viamin/homebridge-rise-garden/compare/v2.0.7...v3.0.0) (2025-09-06)
 
 
