@@ -38,12 +38,21 @@ export class RiseGardenPlatform implements DynamicPlatformPlugin {
     this.log.debug('calling discoverDevices');
     // Return early if there is no config yet
     if (!this.config.username || !this.config.password) {
+      this.log.warn('No username or password configured. Please configure credentials in the plugin settings.');
       return;
     }
 
     // Get list of gardens
     const riseApi = new RiseGardenAPI(this.config, this.log);
-    const gardens = await riseApi.getGardens();
+    let gardens;
+    try {
+      gardens = await riseApi.getGardens();
+    } catch (error) {
+      this.log.error('Failed to discover Rise Garden devices:', (error as Error).message);
+      this.log.error('This may be due to network connectivity issues or Rise Garden API being unavailable.');
+      this.log.error('The plugin will continue to run but accessories will not be available until the API is reachable.');
+      return;
+    }
 
     // loop over the discovered devices and register each one if it has not already been registered
     for (const garden of gardens.data) {
