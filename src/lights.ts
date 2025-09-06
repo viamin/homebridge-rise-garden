@@ -10,6 +10,9 @@ import { RiseGardenAPI } from './api';
  */
 export class RiseGardenLights {
   private service: Service;
+  private cachedLightLevel: number = 0;
+  private pollInterval: NodeJS.Timeout | null = null;
+  private readonly pollFrequency: number = 30000; // 30 seconds
 
   constructor(
     private readonly platform: RiseGardenPlatform,
@@ -37,6 +40,9 @@ export class RiseGardenLights {
     this.service.getCharacteristic(this.platform.Characteristic.Brightness)
       .onSet(this.setBrightness.bind(this))        // SET - bind to the 'setBrightness` method below
       .onGet(this.getBrightness.bind(this));       // GET - bind to the 'getBrightness' method below
+
+    // Start background polling
+    this.startPolling();
   }
 
   /**
@@ -62,19 +68,11 @@ export class RiseGardenLights {
    * @example
    * this.service.updateCharacteristic(this.platform.Characteristic.On, true)
    */
-  async getOn(): Promise<CharacteristicValue> {
+  getOn(): CharacteristicValue {
     this.log.debug('called getOn');
-    try {
-      const api = new RiseGardenAPI(this.config, this.log);
-      const isOn = await api.getLightLevel(this.accessory.context.device.id) > 0;
-      this.log.debug('Get Characteristic On ->', isOn);
-      return isOn;
-    } catch (err) {
-      this.log.info('Error getting light state via Rise API');
-      this.log.debug('Error getting on:', err);
-      // if you need to return an error to show the device as "Not Responding" in the Home app:
-      throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
-    }
+    const isOn = this.cachedLightLevel > 0;
+    this.log.debug('Get Characteristic On ->', isOn);
+    return isOn;
   }
 
   /**
@@ -86,6 +84,10 @@ export class RiseGardenLights {
     try {
       const api = new RiseGardenAPI(this.config, this.log);
       await api.setLightLevel(this.accessory.context.device.id, value as number);
+      // Update cache immediately after successful set
+      this.cachedLightLevel = value as number;
+      // Update the On characteristic as well since brightness affects it
+      this.service.updateCharacteristic(this.platform.Characteristic.On, (value as number) > 0);
     } catch (err) {
       this.log.info('Error setting brightness via Rise API');
       this.log.debug('Error setting brightness:', err);
@@ -98,18 +100,44 @@ export class RiseGardenLights {
    * Handle the "GET" requests from HomeKit
    * These are sent when HomeKit wants to know the current state of the accessory, for example, checking if a Light bulb is on.
    */
-  async getBrightness(): Promise<CharacteristicValue> {
+  getBrightness(): CharacteristicValue {
     this.log.debug('called getBrightness');
+    this.log.debug('Get Characteristic Brightness ->', this.cachedLightLevel);
+    return this.cachedLightLevel;
+  }
+
+  private startPolling(): void {
+    // Initial update
+    this.updateFromAPI();
+
+    // Set up periodic polling
+    this.pollInterval = setInterval(() => {
+      this.updateFromAPI();
+    }, this.pollFrequency);
+  }
+
+  private async updateFromAPI(): Promise<void> {
     try {
+      this.log.debug('Updating light level from API');
       const api = new RiseGardenAPI(this.config, this.log);
-      const brightness = await api.getLightLevel(this.accessory.context.device.id);
-      this.log.debug('Get Characteristic Brightness ->', brightness);
-      return brightness;
-    } catch (err) {
-      this.log.info('Error getting light brightness via Rise API');
-      this.log.debug('Error getting brightness:', err);
-      // if you need to return an error to show the device as "Not Responding" in the Home app:
-      throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
+      const newLevel = await api.getLightLevel(this.accessory.context.device.id);
+
+      if (newLevel !== this.cachedLightLevel) {
+        this.cachedLightLevel = newLevel;
+        // Notify HomeKit of the change
+        this.service.updateCharacteristic(this.platform.Characteristic.Brightness, newLevel);
+        this.service.updateCharacteristic(this.platform.Characteristic.On, newLevel > 0);
+        this.log.debug('Updated characteristics with new values:', newLevel, newLevel > 0);
+      }
+    } catch (error) {
+      this.log.error('Failed to update light level from API:', (error as Error).message);
+    }
+  }
+
+  public destroy(): void {
+    if (this.pollInterval) {
+      clearInterval(this.pollInterval);
+      this.pollInterval = null;
     }
   }
 }

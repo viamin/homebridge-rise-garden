@@ -8,7 +8,6 @@ type Token = {
   expires_in: number;
 };
 export class RiseGardenAPI {
-  private static instance: RiseGardenAPI;
   private baseUrl: string;
   public readonly log: Logger;
   private tokenInfo: Token;
