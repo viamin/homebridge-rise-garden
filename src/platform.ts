@@ -47,8 +47,8 @@ export class RiseGardenPlatform implements DynamicPlatformPlugin {
     let gardens;
     try {
       gardens = await riseApi.getGardens();
-    } catch (error: any) {
-      this.log.error('Failed to discover Rise Garden devices:', error.message);
+    } catch (error) {
+      this.log.error('Failed to discover Rise Garden devices:', (error as Error).message);
       this.log.error('This may be due to network connectivity issues or Rise Garden API being unavailable.');
       this.log.error('The plugin will continue to run but accessories will not be available until the API is reachable.');
       return;

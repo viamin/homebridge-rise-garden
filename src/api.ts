@@ -104,8 +104,8 @@ export class RiseGardenAPI {
         expires_in: expires_in + new Date().getTime(),
       };
       return true;
-    } catch (error: any) {
-      this.log.error('Failed to refresh token:', error.message);
+    } catch (error) {
+      this.log.error('Failed to refresh token:', (error as Error).message);
       return false;
     }
   }
@@ -140,8 +140,8 @@ export class RiseGardenAPI {
         expires_in: expires_in + new Date().getTime(),
       };
       return true;
-    } catch (error: any) {
-      this.log.error('Failed to login:', error.message);
+    } catch (error) {
+      this.log.error('Failed to login:', (error as Error).message);
       return false;
     }
   }
@@ -167,9 +167,10 @@ export class RiseGardenAPI {
 
     try {
       return await axios(options);
-    } catch (error: any) {
-      this.log.error(`API request failed for ${path}:`, error.message);
-      if (error.code === 'EAI_AGAIN' || error.code === 'ENOTFOUND') {
+    } catch (error) {
+      const err = error as Error & { code?: string };
+      this.log.error(`API request failed for ${path}:`, err.message);
+      if (err.code === 'EAI_AGAIN' || err.code === 'ENOTFOUND') {
         this.log.error('DNS resolution failed. Check your internet connection and DNS settings.');
       }
       throw error;
