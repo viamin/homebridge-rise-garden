@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.7](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.6...homebridge-rise-garden-v2.0.7) (2025-09-06)
+
+
+### Bug Fixes
+
+* update release workflow to include publish steps and comments on PRs ([a69a358](https://github.com/viamin/homebridge-rise-garden/commit/a69a358033ffc3b05ed852e5e1d1f604b2174646))
+
 ## [2.0.6](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.5...homebridge-rise-garden-v2.0.6) (2025-09-06)
 
 
