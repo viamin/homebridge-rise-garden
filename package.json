@@ -1,7 +1,7 @@
 {
     "displayName": "Homebridge Rise Garden",
     "name": "homebridge-rise-garden",
-    "version": "2.0.7",
+    "version": "3.0.0",
     "description": "A Homebridge plugin to control the lights on your Rise Garden from HomeKit.",
     "license": "Apache-2.0",
     "repository": {
