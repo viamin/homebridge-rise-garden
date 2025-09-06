@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.5...homebridge-rise-garden-v2.0.6) (2025-09-06)
+
+
+### Build System
+
+* **deps:** upgrade eslint and plugins ([4806191](https://github.com/viamin/homebridge-rise-garden/commit/4806191a775357e98e77cca2a9a170e7c7e2fe46))
+
 ## [2.0.5](https://github.com/viamin/homebridge-rise-garden/compare/homebridge-rise-garden-v2.0.4...homebridge-rise-garden-v2.0.5) (2025-09-04)
 
 
