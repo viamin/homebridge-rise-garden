@@ -1,9 +1,7 @@
-# This workflow runs tests on push and PR
-name: Build and Test
+# This workflow runs build, lint, and tests on push and PR
+name: CI
 on:
   push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -11,22 +9,32 @@ concurrency:
   group: build-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    strategy:
+      matrix:
+        # the Node.js versions to build on
+        node-version: [18, 20]
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm ci
       - name: Run linter
         run: npm run lint
       - name: Build project
         run: npm run build
+        env:
+          CI: true
       - name: Run tests
+        if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
         run: npm test
