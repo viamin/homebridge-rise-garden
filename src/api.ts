@@ -88,21 +88,26 @@ export class RiseGardenAPI {
       data: JSON.stringify(data),
     };
 
-    const res = await axios.request(options);
-    if (res.status !== 200) {
+    try {
+      const res = await axios.request(options);
+      if (res.status !== 200) {
+        return false;
+      }
+
+      const { token, expires_in } = res.data;
+      const cached_user_id = this.tokenInfo.user_id;
+
+      this.tokenInfo = {
+        access_token: token,
+        refresh_token: refresh_token,
+        user_id: cached_user_id,
+        expires_in: expires_in + new Date().getTime(),
+      };
+      return true;
+    } catch (error: any) {
+      this.log.error('Failed to refresh token:', error.message);
       return false;
     }
-
-    const { token, expires_in } = res.data;
-    const cached_user_id = this.tokenInfo.user_id;
-
-    this.tokenInfo = {
-      access_token: token,
-      refresh_token: refresh_token,
-      user_id: cached_user_id,
-      expires_in: expires_in + new Date().getTime(),
-    };
-    return true;
   }
 
   private async login(username: string, password: string): Promise<boolean> {
@@ -119,21 +124,26 @@ export class RiseGardenAPI {
       data: JSON.stringify(data),
     };
 
-    const res = await axios.request(options);
-    if (res.status !== 200) {
+    try {
+      const res = await axios.request(options);
+      if (res.status !== 200) {
+        return false;
+      }
+
+      const { token, refresh_token, expires_in } = res.data;
+      const user_id = res.data.user.id;
+
+      this.tokenInfo = {
+        access_token: token,
+        refresh_token: refresh_token,
+        user_id: user_id,
+        expires_in: expires_in + new Date().getTime(),
+      };
+      return true;
+    } catch (error: any) {
+      this.log.error('Failed to login:', error.message);
       return false;
     }
-
-    const { token, refresh_token, expires_in } = res.data;
-    const user_id = res.data.user.id;
-
-    this.tokenInfo = {
-      access_token: token,
-      refresh_token: refresh_token,
-      user_id: user_id,
-      expires_in: expires_in + new Date().getTime(),
-    };
-    return true;
   }
 
   private async request(method: Method, path: string, params: string|null = null, body: string|null = null): Promise<AxiosResponse> {
@@ -155,6 +165,14 @@ export class RiseGardenAPI {
       data: body,
     };
 
-    return axios(options);
+    try {
+      return await axios(options);
+    } catch (error: any) {
+      this.log.error(`API request failed for ${path}:`, error.message);
+      if (error.code === 'EAI_AGAIN' || error.code === 'ENOTFOUND') {
+        this.log.error('DNS resolution failed. Check your internet connection and DNS settings.');
+      }
+      throw error;
+    }
   }
 }
