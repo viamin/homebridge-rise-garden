@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.5](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.4...v3.0.5) (2025-11-18)
+
+
+### Build System
+
+* **deps-dev:** bump js-yaml from 3.14.1 to 3.14.2 ([e7093f2](https://github.com/viamin/homebridge-rise-garden/commit/e7093f2d5085b010126cd28f354f75c2cda776be))
+* **deps-dev:** bump the dev-dependencies group across 1 directory with 7 updates ([bfed786](https://github.com/viamin/homebridge-rise-garden/commit/bfed786dfbbb3274cf390a8b2a8a04c27c7e1246))
+* **deps:** bump actions/checkout from 5.0.0 to 5.0.1 ([ce70fb3](https://github.com/viamin/homebridge-rise-garden/commit/ce70fb3cd55109fcb338a74d3a972ec5eee87f18))
+* **deps:** bump axios from 1.13.0 to 1.13.2 ([c0d8c35](https://github.com/viamin/homebridge-rise-garden/commit/c0d8c355866f71d5884bd48cb5d9e10e1ceadcb7))
+
 ## [3.0.4](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.3...v3.0.4) (2025-10-29)
 
 
