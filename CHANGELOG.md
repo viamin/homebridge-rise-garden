@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.6](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.5...v3.0.6) (2025-12-29)
+
+
+### Build System
+
+* **deps-dev:** bump @typescript-eslint/eslint-plugin ([909370e](https://github.com/viamin/homebridge-rise-garden/commit/909370eec7a30c168f70ecf90e99bb32ac4c11ba))
+* **deps-dev:** bump @typescript-eslint/parser from 8.49.0 to 8.50.1 ([b701996](https://github.com/viamin/homebridge-rise-garden/commit/b701996d920f651eb79765082fd104889b69b37e))
+* **deps-dev:** bump @typescript-eslint/parser from 8.50.1 to 8.51.0 ([102b277](https://github.com/viamin/homebridge-rise-garden/commit/102b277b5f3b7857d521be7c67505444cfd6bbfd))
+* **deps-dev:** bump the dev-dependencies group with 4 updates ([7d302be](https://github.com/viamin/homebridge-rise-garden/commit/7d302beb9a6f7133b5d43efc4068cca297dc7e7c))
+
 ## [3.0.5](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.4...v3.0.5) (2025-12-11)
 
 
