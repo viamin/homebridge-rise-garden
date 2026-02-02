@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.8](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.7...v3.0.8) (2026-02-02)
+
+
+### Build System
+
+* **deps-dev:** bump @typescript-eslint/parser from 8.53.1 to 8.54.0 ([3465b2b](https://github.com/viamin/homebridge-rise-garden/commit/3465b2b3d1c3b35df70fc3b56b87a49a0df14a5a))
+* **deps-dev:** bump the dev-dependencies group with 2 updates ([5ac18cb](https://github.com/viamin/homebridge-rise-garden/commit/5ac18cb72fd9be396bb6cf83e532152b6b4b107a))
+* **deps:** bump actions/checkout from 6.0.1 to 6.0.2 ([104d9e1](https://github.com/viamin/homebridge-rise-garden/commit/104d9e141fe14640e1f6880a0db459e543df696c))
+* **deps:** bump apexskier/github-release-commenter from 1.3.6 to 1.4.1 ([312a38f](https://github.com/viamin/homebridge-rise-garden/commit/312a38fefd693d8bce22e2897a69086dee1af76a))
+* **deps:** bump axios from 1.13.2 to 1.13.3 ([d391a8a](https://github.com/viamin/homebridge-rise-garden/commit/d391a8a3ddae4436aa8dfa142e06af0672971346))
+
 ## [3.0.7](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.6...v3.0.7) (2026-01-20)
 
 
