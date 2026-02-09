@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.9](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.8...v3.0.9) (2026-02-09)
+
+
+### Build System
+
+* **deps-dev:** bump the dev-dependencies group with 3 updates ([c895118](https://github.com/viamin/homebridge-rise-garden/commit/c8951183b6666bf2aebaa94f76bb93a67ae05729))
+* **deps:** bump axios from 1.13.3 to 1.13.4 ([ee30282](https://github.com/viamin/homebridge-rise-garden/commit/ee3028229a44c27b125fd08d220d87cb54f2e15c))
+
 ## [3.0.8](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.7...v3.0.8) (2026-02-02)
 
 
