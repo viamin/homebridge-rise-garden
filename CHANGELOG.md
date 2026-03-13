@@ -1,5 +1,20 @@
 # Changelog
 
+## [3.0.10](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.9...v3.0.10) (2026-03-13)
+
+
+### Build System
+
+* **deps-dev:** bump @typescript-eslint/parser from 8.55.0 to 8.56.0 ([d1efefd](https://github.com/viamin/homebridge-rise-garden/commit/d1efefd51579192c32353d7b7d3721038e9341a1))
+* **deps-dev:** bump @typescript-eslint/parser from 8.56.0 to 8.57.0 ([ce77780](https://github.com/viamin/homebridge-rise-garden/commit/ce77780bb0043bbb4bbf2e15a212d6bd30773218))
+* **deps-dev:** bump ajv from 6.12.6 to 6.14.0 ([23e8480](https://github.com/viamin/homebridge-rise-garden/commit/23e8480c9e3613d94658791e5ee3fb45d3437c0a))
+* **deps-dev:** bump minimatch from 3.1.2 to 3.1.5 ([d0fc7b7](https://github.com/viamin/homebridge-rise-garden/commit/d0fc7b7fa6055494b621aa4ca17629eab04a4116))
+* **deps-dev:** bump the dev-dependencies group across 1 directory with 6 updates ([5e78bf2](https://github.com/viamin/homebridge-rise-garden/commit/5e78bf23e2b7f5745f33e41205a7afec0e68d0bd))
+* **deps-dev:** bump the dev-dependencies group across 1 directory with 8 updates ([046c9f5](https://github.com/viamin/homebridge-rise-garden/commit/046c9f5957061b622b967b9a3b8ca73b2422b478))
+* **deps:** bump actions/setup-node from 6.2.0 to 6.3.0 ([bd76fa5](https://github.com/viamin/homebridge-rise-garden/commit/bd76fa57fa6efec7f9a7fd9aed1820f630b74c76))
+* **deps:** bump axios from 1.13.4 to 1.13.5 ([c374f8d](https://github.com/viamin/homebridge-rise-garden/commit/c374f8d3f26d74656a90a9144da210d88e2cc0ef))
+* **deps:** bump axios from 1.13.5 to 1.13.6 ([b9ce5f1](https://github.com/viamin/homebridge-rise-garden/commit/b9ce5f122758e88c3dcfc10b07261704c1913e41))
+
 ## [3.0.9](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.8...v3.0.9) (2026-02-09)
 
 
