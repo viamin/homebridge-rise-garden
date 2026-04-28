@@ -1,5 +1,37 @@
 # Changelog
 
+## [3.0.11](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.10...v3.0.11) (2026-04-28)
+
+
+### Build System
+
+* **deps-dev:** bump @typescript-eslint/eslint-plugin ([#614](https://github.com/viamin/homebridge-rise-garden/issues/614)) ([4fd99b0](https://github.com/viamin/homebridge-rise-garden/commit/4fd99b001f84552998e6d45e8e0d31fd9f64d304))
+* **deps-dev:** bump @typescript-eslint/parser from 8.57.0 to 8.57.1 ([ceb88a6](https://github.com/viamin/homebridge-rise-garden/commit/ceb88a69070a2c522181958e1635b5c0be3f71d2))
+* **deps-dev:** bump @typescript-eslint/parser from 8.57.1 to 8.57.2 ([fa8006f](https://github.com/viamin/homebridge-rise-garden/commit/fa8006ff4127e10f1a57477e0142139ba3f39ac6))
+* **deps-dev:** bump @typescript-eslint/parser from 8.57.2 to 8.58.0 ([61ff2ab](https://github.com/viamin/homebridge-rise-garden/commit/61ff2ab5db19a978890034261ad8515c0ac21415))
+* **deps-dev:** bump @typescript-eslint/parser from 8.58.0 to 8.58.2 ([a4708e0](https://github.com/viamin/homebridge-rise-garden/commit/a4708e0df2cffe6271a6a7461dc4c09ed23db0b8))
+* **deps-dev:** bump @typescript-eslint/parser from 8.58.0 to 8.58.2 ([081f812](https://github.com/viamin/homebridge-rise-garden/commit/081f8126f22d64b0885d0f1235602f1311032dbb))
+* **deps-dev:** bump @typescript-eslint/parser from 8.58.2 to 8.59.0 ([#610](https://github.com/viamin/homebridge-rise-garden/issues/610)) ([bb3d78f](https://github.com/viamin/homebridge-rise-garden/commit/bb3d78fb1c30be01024a83e01c309a8a366492c2))
+* **deps-dev:** bump @typescript-eslint/parser from 8.59.0 to 8.59.1 ([#615](https://github.com/viamin/homebridge-rise-garden/issues/615)) ([fddab01](https://github.com/viamin/homebridge-rise-garden/commit/fddab01c414e7eedcaf8f4b6060bcb8806e4d91b))
+* **deps-dev:** bump flatted from 3.3.3 to 3.4.2 ([a73e32c](https://github.com/viamin/homebridge-rise-garden/commit/a73e32c7b184a75211bace9c93a3a2c98a9dbe07))
+* **deps-dev:** bump handlebars from 4.7.8 to 4.7.9 ([688542a](https://github.com/viamin/homebridge-rise-garden/commit/688542a36a8c2067d8fa0287002fea81f3466588))
+* **deps-dev:** bump picomatch from 2.3.1 to 2.3.2 ([0ac50c5](https://github.com/viamin/homebridge-rise-garden/commit/0ac50c5f05a3e2c6214b161b9466211ac421f5c7))
+* **deps-dev:** bump the dev-dependencies group across 1 directory with 7 updates ([#612](https://github.com/viamin/homebridge-rise-garden/issues/612)) ([55fb97e](https://github.com/viamin/homebridge-rise-garden/commit/55fb97e14ea92839ed880a3c58c9fbbb14946d22))
+* **deps-dev:** bump the dev-dependencies group with 3 updates ([8a5d96d](https://github.com/viamin/homebridge-rise-garden/commit/8a5d96d3e7b0c44302295c4bfa29965f5eb7b404))
+* **deps:** bump actions/github-script from 8.0.0 to 9.0.0 ([d8331b7](https://github.com/viamin/homebridge-rise-garden/commit/d8331b7faafdd98cfe0d839e216c2b9d08969d8f))
+* **deps:** bump actions/github-script from 8.0.0 to 9.0.0 ([1786fb2](https://github.com/viamin/homebridge-rise-garden/commit/1786fb2d6b406191c3522fc0f2ace7fde7df17d2))
+* **deps:** bump actions/setup-node from 6.3.0 to 6.4.0 ([#609](https://github.com/viamin/homebridge-rise-garden/issues/609)) ([16e207f](https://github.com/viamin/homebridge-rise-garden/commit/16e207fc11cc105c09ab3ae6f13da69e13cd7ea1))
+* **deps:** bump axios from 1.13.6 to 1.15.0 ([7dcde72](https://github.com/viamin/homebridge-rise-garden/commit/7dcde7287a9c78e66a58b1c7cc6a90713815e636))
+* **deps:** bump axios from 1.13.6 to 1.15.0 ([1e5934d](https://github.com/viamin/homebridge-rise-garden/commit/1e5934d741bba5917eb8dae5c481fcd722b37fcb))
+* **deps:** bump axios from 1.15.0 to 1.15.1 ([#611](https://github.com/viamin/homebridge-rise-garden/issues/611)) ([cdc49a4](https://github.com/viamin/homebridge-rise-garden/commit/cdc49a46daee649bc043e93d01e815505ef1259d))
+* **deps:** bump axios from 1.15.1 to 1.15.2 ([#616](https://github.com/viamin/homebridge-rise-garden/issues/616)) ([80e987d](https://github.com/viamin/homebridge-rise-garden/commit/80e987db70817d400c9946b06d9dfc3d77d14ae9))
+* **deps:** bump brace-expansion ([55dd659](https://github.com/viamin/homebridge-rise-garden/commit/55dd659a016779c1f023b893163dd0b9cf2b3c01))
+* **deps:** bump follow-redirects from 1.15.11 to 1.16.0 ([5a2265d](https://github.com/viamin/homebridge-rise-garden/commit/5a2265d79765ec38e51a55719e17e25d27be7309))
+* **deps:** bump follow-redirects from 1.15.11 to 1.16.0 ([dd57dbb](https://github.com/viamin/homebridge-rise-garden/commit/dd57dbb1c4d571093a18a6cc2360df74d59231fa))
+* **deps:** bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([c836622](https://github.com/viamin/homebridge-rise-garden/commit/c83662228407de5f5a5df04cf07e42b6886b67e6))
+* **deps:** bump googleapis/release-please-action from 4.4.0 to 4.4.1 ([c6e13d9](https://github.com/viamin/homebridge-rise-garden/commit/c6e13d9342859815f87e66f1fa932c5238804295))
+* **deps:** bump googleapis/release-please-action from 4.4.1 to 5.0.0 ([#613](https://github.com/viamin/homebridge-rise-garden/issues/613)) ([d3b2a7e](https://github.com/viamin/homebridge-rise-garden/commit/d3b2a7e86da0ac4131ff581dba8c0fc1881be8f3))
+
 ## [3.0.10](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.9...v3.0.10) (2026-03-13)
 
 
