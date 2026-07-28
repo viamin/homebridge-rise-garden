@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.15](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.14...v3.0.15) (2026-07-28)
+
+
+### Build System
+
+* **deps:** bump axios from 1.16.0 to 1.18.1 ([#635](https://github.com/viamin/homebridge-rise-garden/issues/635)) ([be41d6d](https://github.com/viamin/homebridge-rise-garden/commit/be41d6da43725cf3e6d58455e71bbea75f92dc5a))
+
 ## [3.0.14](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.13...v3.0.14) (2026-07-28)
 
 
