@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.17](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.16...v3.0.17) (2026-07-28)
+
+
+### Build System
+
+* **deps:** bump actions/setup-node from 6.4.0 to 7.0.0 ([#643](https://github.com/viamin/homebridge-rise-garden/issues/643)) ([b7a775f](https://github.com/viamin/homebridge-rise-garden/commit/b7a775f8aa03f57040e0b67e450d45f89383853a))
+
 ## [3.0.16](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.15...v3.0.16) (2026-07-28)
 
 
