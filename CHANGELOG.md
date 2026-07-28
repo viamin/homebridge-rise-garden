@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.16](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.15...v3.0.16) (2026-07-28)
+
+
+### Build System
+
+* **deps:** bump actions/checkout from 6.0.2 to 7.0.1 ([#644](https://github.com/viamin/homebridge-rise-garden/issues/644)) ([5640b6e](https://github.com/viamin/homebridge-rise-garden/commit/5640b6e3431985a1d938b040aeea03d6c3aa2a7e))
+
 ## [3.0.15](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.14...v3.0.15) (2026-07-28)
 
 
