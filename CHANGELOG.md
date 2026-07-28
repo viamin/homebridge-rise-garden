@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.14](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.13...v3.0.14) (2026-07-28)
+
+
+### Build System
+
+* **deps:** bump ws from 7.5.10 to 7.5.13 ([#642](https://github.com/viamin/homebridge-rise-garden/issues/642)) ([63fe15d](https://github.com/viamin/homebridge-rise-garden/commit/63fe15d84f51b9c480e7d895f66067f12face1e8))
+
 ## [3.0.13](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.12...v3.0.13) (2026-07-28)
 
 
