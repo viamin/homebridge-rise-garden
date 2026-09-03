@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.38](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.37...v3.0.38) (2026-09-03)
+
+
+### Build System
+
+* **deps-dev:** bump @humanfs/node from 0.16.7 to 0.16.8 ([#692](https://github.com/viamin/homebridge-rise-garden/issues/692)) ([3b15b1a](https://github.com/viamin/homebridge-rise-garden/commit/3b15b1a0fee439fc67fe7719c9d8d119e98f2fb5))
+* **deps-dev:** bump browserslist from 4.25.4 to 4.28.8 ([#691](https://github.com/viamin/homebridge-rise-garden/issues/691)) ([691b732](https://github.com/viamin/homebridge-rise-garden/commit/691b73290dae0ef597a0728ddd17609f15915f75))
+
 ## [3.0.37](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.36...v3.0.37) (2026-09-03)
 
 
