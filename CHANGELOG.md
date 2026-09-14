@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.41](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.40...v3.0.41) (2026-09-14)
+
+
+### Build System
+
+* **deps-dev:** bump @typescript-eslint/parser from 8.69.0 to 8.70.0 ([#699](https://github.com/viamin/homebridge-rise-garden/issues/699)) ([ddbdc2a](https://github.com/viamin/homebridge-rise-garden/commit/ddbdc2abbe9b584a36b1bdb10b57560dd9113551))
+
 ## [3.0.40](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.39...v3.0.40) (2026-09-08)
 
 
