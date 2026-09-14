@@ -60,4 +60,13 @@ export default [{
     // '@typescript-eslint/semi': ['warn'],
     // '@typescript-eslint/member-delimiter-style': ['warn'],
   },
+}, {
+  files: ['commitlint.config.js'],
+  languageOptions: {
+    sourceType: 'commonjs',
+    globals: {
+      module: 'writable',
+      require: 'readonly',
+    },
+  },
 }];
