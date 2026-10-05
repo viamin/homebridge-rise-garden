@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.52](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.51...v3.0.52) (2026-10-05)
+
+
+### Build System
+
+* **deps-dev:** bump the dev-dependencies group with 4 updates ([#714](https://github.com/viamin/homebridge-rise-garden/issues/714)) ([cbc8142](https://github.com/viamin/homebridge-rise-garden/commit/cbc8142bc117241e26c018f6932adc1de512a302))
+
 ## [3.0.51](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.50...v3.0.51) (2026-10-05)
 
 
