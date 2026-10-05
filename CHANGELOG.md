@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.51](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.50...v3.0.51) (2026-10-05)
+
+
+### Build System
+
+* **deps-dev:** bump brace-expansion from 1.1.18 to 1.1.21 ([#717](https://github.com/viamin/homebridge-rise-garden/issues/717)) ([694c939](https://github.com/viamin/homebridge-rise-garden/commit/694c939dab01b7bdded21ddc739a39c484416515))
+
 ## [3.0.50](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.49...v3.0.50) (2026-10-05)
 
 
