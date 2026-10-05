@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.50](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.49...v3.0.50) (2026-10-05)
+
+
+### Build System
+
+* **deps-dev:** bump @babel/core from 7.28.4 to 7.29.7 ([#718](https://github.com/viamin/homebridge-rise-garden/issues/718)) ([460717c](https://github.com/viamin/homebridge-rise-garden/commit/460717c93bdddf3c2af138d95b35979c50b260a6))
+
 ## [3.0.49](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.48...v3.0.49) (2026-10-05)
 
 
