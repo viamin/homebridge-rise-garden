@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.53](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.52...v3.0.53) (2026-10-11)
+
+
+### Build System
+
+* **deps-dev:** bump handlebars from 4.7.9 to 4.7.10 ([#722](https://github.com/viamin/homebridge-rise-garden/issues/722)) ([9b6b90e](https://github.com/viamin/homebridge-rise-garden/commit/9b6b90e548b80e3a2ae0e69ce72203adddce2869))
+
 ## [3.0.52](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.51...v3.0.52) (2026-10-05)
 
 
