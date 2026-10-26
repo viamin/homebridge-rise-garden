@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.64](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.63...v3.0.64) (2026-10-26)
+
+
+### Build System
+
+* **deps-dev:** bump fast-uri from 3.1.8 to 3.1.9 ([#744](https://github.com/viamin/homebridge-rise-garden/issues/744)) ([e85be0c](https://github.com/viamin/homebridge-rise-garden/commit/e85be0c68e5081f0ba702ba0764fc0d9e594d85c))
+
 ## [3.0.63](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.62...v3.0.63) (2026-10-26)
 
 
