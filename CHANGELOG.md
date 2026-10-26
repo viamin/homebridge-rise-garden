@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.62](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.61...v3.0.62) (2026-10-26)
+
+
+### Build System
+
+* **deps:** bump github/codeql-action from 4.39.0 to 4.39.1 ([#742](https://github.com/viamin/homebridge-rise-garden/issues/742)) ([11dd902](https://github.com/viamin/homebridge-rise-garden/commit/11dd902ed1ebc7304c8a6534d6fab8f20751cd57))
+
 ## [3.0.61](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.60...v3.0.61) (2026-10-20)
 
 
