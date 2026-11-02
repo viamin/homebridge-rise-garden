@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "summary": "The lockfile installs with TypeScript 6.0.3, which satisfies @typescript-eslint/eslint-plugin 8.72.1, and checks pass under the supported CI Node versions.",
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "status": "passed",
+      "verification": {
+        "kind": "human_or_external_evidence",
+        "references": [
+          {
+            "locator": "package-lock.json",
+            "result": "npm ci passed locally"
+          },
+          {
+            "locator": ".github/workflows/ci.yml:19",
+            "result": "CI matrix targets Node 20 and 22, both compatible with ESLint 10.14.0"
+          },
+          {
+            "locator": "package.json:20",
+            "result": "lint, build, and test passed locally under Node 20.19.5 and Node 22.13.1"
+          }
+        ]
+      }
+    }
+  ]
+}
