@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.68](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.67...v3.0.68) (2026-11-02)
+
+
+### Build System
+
+* **deps:** bump follow-redirects from 1.16.1 to 1.16.2 ([#752](https://github.com/viamin/homebridge-rise-garden/issues/752)) ([31e86fd](https://github.com/viamin/homebridge-rise-garden/commit/31e86fd450a9d4791bdbcad8ee59d873b01c5107))
+
 ## [3.0.67](https://github.com/viamin/homebridge-rise-garden/compare/v3.0.66...v3.0.67) (2026-11-02)
 
 
