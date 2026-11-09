@@ -1,25 +1,29 @@
 {
   "status": "passed",
-  "summary": "The lockfile installs with TypeScript 6.0.3, which satisfies @typescript-eslint/eslint-plugin 8.72.1, and checks pass under the supported CI Node versions.",
+  "summary": "Fixed CI ERESOLVE failure by reverting the typescript dev-dependency to ^6.0.3 (no typescript-eslint/ts-jest release supports TS 7 yet) while keeping the homebridge 2.5.0 and rimraf 6.1.4 bumps, and regenerating package-lock.json. Full CI pipeline (npm ci, npm run lint, npm run build, npm test) verified green locally.",
   "acceptance_criteria": [
     {
       "id": "AC-1",
       "status": "passed",
+      "description": "npm ci resolves and installs cleanly on the PR branch",
       "verification": {
         "kind": "human_or_external_evidence",
         "references": [
-          {
-            "locator": "package-lock.json",
-            "result": "npm ci passed locally"
-          },
-          {
-            "locator": ".github/workflows/ci.yml:19",
-            "result": "CI matrix targets Node 20 and 22, both compatible with ESLint 10.14.0"
-          },
-          {
-            "locator": "package.json:20",
-            "result": "lint, build, and test passed locally under Node 20.19.5 and Node 22.13.1"
-          }
+          { "locator": "package-lock.json (typescript@6.0.3, homebridge@2.5.0, rimraf@6.1.4)", "result": "passed" },
+          { "locator": "local run: rm -rf node_modules && npm ci", "result": "passed (exit 0)" }
+        ]
+      }
+    },
+    {
+      "id": "AC-2",
+      "status": "passed",
+      "description": "CI checks (lint, build, test) pass with the remaining dependency bumps (homebridge 2.5.0, rimraf 6.1.4)",
+      "verification": {
+        "kind": "unit_or_service_test",
+        "references": [
+          { "locator": "local run: npm run lint (eslint src/**.ts --max-warnings=0)", "result": "passed (exit 0)" },
+          { "locator": "local run: npm run build (rimraf ./dist && tsc)", "result": "passed (exit 0, dist/ emitted)" },
+          { "locator": "local run: npm test (jest --passWithNoTests)", "result": "passed (exit 0; no test files exist in repo, same as before this PR)" }
         ]
       }
     }
