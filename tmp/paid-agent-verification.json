@@ -1,29 +1,36 @@
 {
   "status": "passed",
-  "summary": "Fixed CI ERESOLVE failure by reverting the typescript dev-dependency to ^6.0.3 (no typescript-eslint/ts-jest release supports TS 7 yet) while keeping the homebridge 2.5.0 and rimraf 6.1.4 bumps, and regenerating package-lock.json. Full CI pipeline (npm ci, npm run lint, npm run build, npm test) verified green locally.",
+  "summary": "The dependency lockfile installs without peer-resolution errors and the configured CI commands pass.",
   "acceptance_criteria": [
     {
       "id": "AC-1",
       "status": "passed",
-      "description": "npm ci resolves and installs cleanly on the PR branch",
       "verification": {
-        "kind": "human_or_external_evidence",
+        "kind": "permanent_system_test",
+        "rationale": "A clean npm ci verifies the lockfile resolves @typescript-eslint/eslint-plugin 8.72.2 with TypeScript 6.0.3; the repository's CI lint, build, and test commands then completed successfully.",
+        "limitations": [
+          "Verification ran under Node.js 24.18.0; CI also exercises Node.js 20 and 22.",
+          "The Jest suite contains no test files."
+        ],
+        "inputs": [
+          {
+            "type": "repository_file",
+            "path": "package.json",
+            "revision": "d1bb33bac994477aefed640337b2579b9b712d4f",
+            "digest": "e44da6563b682b499dfac121c438ff41dd582318644ca505d8e8bcdafe062128"
+          },
+          {
+            "type": "repository_file",
+            "path": "package-lock.json",
+            "revision": "d1bb33bac994477aefed640337b2579b9b712d4f",
+            "digest": "8fa475faba87faf4b20b50fb3dd6f70568e56783b019bf3136ada7c38d7d1636"
+          }
+        ],
         "references": [
-          { "locator": "package-lock.json (typescript@6.0.3, homebridge@2.5.0, rimraf@6.1.4)", "result": "passed" },
-          { "locator": "local run: rm -rf node_modules && npm ci", "result": "passed (exit 0)" }
-        ]
-      }
-    },
-    {
-      "id": "AC-2",
-      "status": "passed",
-      "description": "CI checks (lint, build, test) pass with the remaining dependency bumps (homebridge 2.5.0, rimraf 6.1.4)",
-      "verification": {
-        "kind": "unit_or_service_test",
-        "references": [
-          { "locator": "local run: npm run lint (eslint src/**.ts --max-warnings=0)", "result": "passed (exit 0)" },
-          { "locator": "local run: npm run build (rimraf ./dist && tsc)", "result": "passed (exit 0, dist/ emitted)" },
-          { "locator": "local run: npm test (jest --passWithNoTests)", "result": "passed (exit 0; no test files exist in repo, same as before this PR)" }
+          {
+            "locator": "package.json:18-25",
+            "result": "npm ci, npm run lint, npm run build, and npm test passed"
+          }
         ]
       }
     }
