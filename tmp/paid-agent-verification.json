@@ -1,35 +1,42 @@
 {
   "status": "passed",
-  "summary": "The dependency lockfile installs without peer-resolution errors and the configured CI commands pass.",
+  "summary": "The lockfile resolves @typescript-eslint/eslint-plugin 8.73.0 with its supported TypeScript 6.0.3 peer range; npm ci, lint, tests, and build all passed locally.",
   "acceptance_criteria": [
     {
       "id": "AC-1",
       "status": "passed",
       "verification": {
         "kind": "permanent_system_test",
-        "rationale": "A clean npm ci verifies the lockfile resolves @typescript-eslint/eslint-plugin 8.72.2 with TypeScript 6.0.3; the repository's CI lint, build, and test commands then completed successfully.",
+        "rationale": "A clean npm ci completed successfully using the committed package manifest and lockfile, and the resolved dependency tree reports eslint-plugin 8.73.0 using TypeScript 6.0.3 within its declared >=4.8.4 <6.1.0 peer range.",
         "limitations": [
-          "Verification ran under Node.js 24.18.0; CI also exercises Node.js 20 and 22.",
-          "The Jest suite contains no test files."
+          "The local verification used Node.js 24; CI will independently run npm ci on Node.js 20 and 22."
         ],
         "inputs": [
           {
             "type": "repository_file",
             "path": "package.json",
-            "revision": "d1bb33bac994477aefed640337b2579b9b712d4f",
-            "digest": "e44da6563b682b499dfac121c438ff41dd582318644ca505d8e8bcdafe062128"
+            "revision": "3bd816e135a119a789c82498b7ffe4c851191702",
+            "digest": "7469c4b2769b6de7afa3cd524f59ab3f9b7746b0b6a6a47b2e85f8290749caec"
           },
           {
             "type": "repository_file",
             "path": "package-lock.json",
-            "revision": "d1bb33bac994477aefed640337b2579b9b712d4f",
-            "digest": "8fa475faba87faf4b20b50fb3dd6f70568e56783b019bf3136ada7c38d7d1636"
+            "revision": "3bd816e135a119a789c82498b7ffe4c851191702",
+            "digest": "77ad10c3dc5ace1b9b665385b4934dbdaca053f17e09cbaedb90955ead1a1e0e"
           }
         ],
         "references": [
           {
-            "locator": "package.json:18-25",
-            "result": "npm ci, npm run lint, npm run build, and npm test passed"
+            "locator": "package-lock.json:2773-2800",
+            "result": "@typescript-eslint/eslint-plugin 8.73.0 declares the compatible TypeScript peer range."
+          },
+          {
+            "locator": "package-lock.json:9221-9233",
+            "result": "passed: TypeScript 6.0.3 is locked."
+          },
+          {
+            "locator": "local command: npm ci",
+            "result": "passed"
           }
         ]
       }
